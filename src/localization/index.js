@@ -4,7 +4,6 @@ import { tr } from './tr.js';
 
 const translations = { en, tr };
 
-// HTML lang attribute'una göre dili alıyoruz, yoksa varsayılan 'en'
 let currentLanguage = document.documentElement.lang || 'en';
 if (!translations[currentLanguage]) {
   console.warn(`Translations for language "${currentLanguage}" not found. Falling back to "en".`);
@@ -37,9 +36,6 @@ export function setLanguage(lang) {
   if (translations[lang]) {
     currentLanguage = lang;
     document.documentElement.lang = lang;
-    // Uygulama genelinde bir "language-changed" eventi dispatch edilebilir.
-    // Veya componentler doğrudan bu değişikliği dinleyebilir (daha karmaşık).
-    // Şimdilik: Componentler ya prop'lar üzerinden güncellenir ya da reload sonrası doğru dili alır.
     console.log(`Language changed to: ${lang}`);
   } else {
     console.warn(`Attempted to set unsupported language: ${lang}`);

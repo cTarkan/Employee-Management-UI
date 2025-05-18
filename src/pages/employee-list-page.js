@@ -209,8 +209,8 @@ class EmployeeListPage extends LitElement {
           : this._filteredEmployees.length === 0 && !this.searchTerm
             ? html`<p>${t('no_employees_found')}</p>`
             : this.viewMode === 'table'
-              ? this.renderTableView() // Bu metot zaten this.employees (sayfalanmış) kullanıyor
-              : this.renderListView()  // Bu metot da this.employees (sayfalanmış) kullanıyor
+              ? this.renderTableView() 
+              : this.renderListView() 
         }
 
         ${this.totalPages > 1 ? html`

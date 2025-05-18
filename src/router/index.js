@@ -1,7 +1,6 @@
 // src/router/index.js
 import { Router } from '@vaadin/router';
 
-// Bu fonksiyon app-shell'den çağrılacak ve router outlet'ini ayarlayacak.
 export const initRouter = (outletElement) => {
   const router = new Router(outletElement);
   router.setRoutes([

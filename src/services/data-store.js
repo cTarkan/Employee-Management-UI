@@ -1,13 +1,14 @@
+// src/services/data-store.js
 const STORAGE_KEY = 'employee_management_data';
-import employeesData from '../data/employees.json';
+import { employeesJsonData } from '../data/employees.js';
 
-const initialEmployees = employeesData.employees;
+const initialEmployees = employeesJsonData.employees;
 
-const generateId = () => {
+export const generateId = () => {
   return Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
 };
 
-const loadEmployees = () => {
+export const loadEmployees = () => {
   const storedData = localStorage.getItem(STORAGE_KEY);
   if (storedData) {
     try {
@@ -17,12 +18,16 @@ const loadEmployees = () => {
       localStorage.removeItem(STORAGE_KEY);
     }
   }
-
   localStorage.setItem(STORAGE_KEY, JSON.stringify(initialEmployees));
   return initialEmployees;
 };
 
 let employees = loadEmployees();
+
+export const __TEST_ONLY__resetStore = () => {
+  localStorage.clear();
+  employees = loadEmployees();
+};
 
 export const getEmployees = () => {
   return [...employees];
@@ -66,4 +71,3 @@ export const deleteEmployee = (id) => {
   }
   return false;
 };
-

@@ -1,8 +1,8 @@
 // src/components/app-shell.js
 import { LitElement, html, css } from 'lit';
-import './navigation-menu.js'; // Navigasyon menüsünü import et
-import { initRouter } from '../router/index.js'; // Router başlatma fonksiyonunu import et
-import { t } from '../localization/index.js'; // t fonksiyonunu global başlık vb. için kullanabiliriz
+import './navigation-menu.js'; 
+import { initRouter } from '../router/index.js'; 
+import { t } from '../localization/index.js'; 
 
 class AppShell extends LitElement {
   static styles = css`
@@ -12,27 +12,25 @@ class AppShell extends LitElement {
       line-height: 1.5;
     }
     .app-header {
-      background-color: #20232a; /* Biraz daha koyu bir başlık alanı */
+      background-color: #20232a; 
       color: white;
       padding: 10px 20px;
       text-align: center;
-      margin-bottom: 1rem; /* Navigasyon ile arasında boşluk */
+      margin-bottom: 1rem; 
     }
     .app-header h1 {
       margin: 0;
       font-size: 1.5rem;
     }
     .main-content {
-      padding: 0 16px 16px; /* Üst padding nav ile sağlandığı için 0 */
-      max-width: 960px; /* İçerik için bir max genişlik */
-      margin: 0 auto; /* Sayfayı ortala */
+      padding: 0 16px 16px; 
+      max-width: 960px; 
+      margin: 0 auto; 
     }
   `;
 
   firstUpdated() {
-    // Shadow DOM içindeki router outlet elementini bul
     const outlet = this.renderRoot.querySelector('#router-outlet');
-    // Router'ı bu outlet ile başlat
     initRouter(outlet);
   }
 
@@ -43,7 +41,6 @@ class AppShell extends LitElement {
       </header>
       <navigation-menu></navigation-menu>
       <main id="router-outlet" class="main-content">
-        <!-- Router içeriği buraya gelecek -->
       </main>
     `;
   }

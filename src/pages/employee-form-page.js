@@ -14,8 +14,8 @@ class EmployeeFormPage extends LitElement {
     dateOfBirth: { type: String },
     phoneNumber: { type: String },
     emailAddress: { type: String },
-    department: { type: String }, // Bu property'nin güncellenmesi select'i tetiklemeli
-    position: { type: String },   // Bu property'nin güncellenmesi select'i tetiklemeli
+    department: { type: String }, 
+    position: { type: String },  
     errors: { type: Object },
     mode: { type: String },
     employeeId: { type: String },
@@ -24,14 +24,14 @@ class EmployeeFormPage extends LitElement {
   static styles = css`
     :host {
       display: block;
-      max-width: 600px; /* Limit form width */
-      margin: 0 auto; /* Center the form */
-      padding-bottom: 2rem; /* Space at the bottom */
+      max-width: 600px; 
+      margin: 0 auto; 
+      padding-bottom: 2rem; 
     }
     form {
       display: grid;
-      grid-template-columns: 1fr; /* Single column layout */
-      gap: 1rem; /* Space between form elements */
+      grid-template-columns: 1fr; 
+      gap: 1rem; 
     }
     .form-group {
       display: flex;
@@ -71,7 +71,7 @@ class EmployeeFormPage extends LitElement {
     .form-actions {
       margin-top: 1rem;
       display: flex;
-      justify-content: flex-end; /* Align button to the right */
+      justify-content: flex-end; 
       gap: 0.5rem;
     }
     button {
@@ -86,7 +86,7 @@ class EmployeeFormPage extends LitElement {
       color: white;
     }
     .submit-btn:hover {
-      background-color: #218838; /* Darken on hover */
+      background-color: #218838; 
     }
     .cancel-btn {
       background-color: var(--secondary-color, #6c757d);
@@ -95,9 +95,6 @@ class EmployeeFormPage extends LitElement {
     .cancel-btn:hover {
       background-color: #5a6268;
     }
-    /* If not using Shadow DOM (createRenderRoot removed), these styles should be global
-       or scoped with a class specific to this page.
-       For now, let's assume Shadow DOM is active for this component. */
   `;
 
 constructor() {
@@ -109,11 +106,9 @@ constructor() {
   this.dateOfBirth = '';
   this.phoneNumber = '';
   this.emailAddress = '';
-  // 'add' modu için varsayılan değerler:
   this.department = DEPARTMENTS[0]; 
   this.position = POSITIONS[0];
   this.errors = {};
-  // Mode will be determined in connectedCallback, which will then set fields accordingly
 }
 
 resetFormFields() {
@@ -123,14 +118,13 @@ resetFormFields() {
   this.dateOfBirth = '';
   this.phoneNumber = '';
   this.emailAddress = '';
-  this.department = DEPARTMENTS[0]; // 'add' modu için varsayılan
-  this.position = POSITIONS[0];     // 'add' modu için varsayılan
+  this.department = DEPARTMENTS[0]; 
+  this.position = POSITIONS[0];    
   this.errors = {};
-  // this.requestUpdate(); // Genellikle Lit, property atamalarından sonra otomatik render yapar.
-                        // Eğer select'ler güncellenmiyorsa bu satırı tekrar ekleyebiliriz.
+
 }
 
-async populateFormForEdit(employee) { // Fonksiyonu async yap
+async populateFormForEdit(employee) { 
   this.firstName = employee.firstName;
   this.lastName = employee.lastName;
   this.dateOfEmployment = employee.dateOfEmployment;
@@ -203,15 +197,7 @@ connectedCallback() {
       if (!emailPattern.test(this.emailAddress)) {
         newErrors.emailAddress = t('validation_invalid_emailAddress');
       }
-      // Uniqueness check should be adjusted for edit mode:
-      // Allow the current employee's email.
-      // const existingEmployees = getEmployees();
-      // if (existingEmployees.some(emp => 
-      //      emp.email.toLowerCase() === this.emailAddress.toLowerCase() &&
-      //      (this.mode === 'add' || emp.id !== this.employeeId) // Exclude self in edit mode
-      //    )) {
-      //   newErrors.emailAddress = t('validation_unique_emailAddress');
-      // }
+     
     }
     this.errors = newErrors;
     return Object.keys(newErrors).length === 0;
@@ -241,7 +227,7 @@ connectedCallback() {
         console.log('Employee updated:', this.employeeId, employeeData);
         Router.go('/employees');
       }
-    } else { // 'add' mode
+    } else { 
       addEmployee(employeeData);
       console.log('Employee added:', employeeData);
       Router.go('/employees');

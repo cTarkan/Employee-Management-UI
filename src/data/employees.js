@@ -1,0 +1,224 @@
+export const employeesJsonData = {
+    "employees": [
+        {
+          "id": "1",
+          "firstName": "John",
+          "lastName": "Doe",
+          "dateOfEmployment": "2022-01-15",
+          "dateOfBirth": "1990-05-20",
+          "phoneNumber": "555-0101",
+          "email": "john.doe@example.com",
+          "department": "Tech",
+          "position": "Senior"
+        },
+        {
+          "id": "2",
+          "firstName": "Jane",
+          "lastName": "Smith",
+          "dateOfEmployment": "2021-11-01",
+          "dateOfBirth": "1992-08-10",
+          "phoneNumber": "555-0102",
+          "email": "jane.smith@example.com",
+          "department": "Analytics",
+          "position": "Medior"
+        },
+        {
+          "id": "3",
+          "firstName": "Alice",
+          "lastName": "Johnson",
+          "dateOfEmployment": "2023-03-01",
+          "dateOfBirth": "1988-12-30",
+          "phoneNumber": "555-0103",
+          "email": "alice.johnson@example.com",
+          "department": "Tech",
+          "position": "Junior"
+        },
+        {
+          "id": "4",
+          "firstName": "Michael",
+          "lastName": "Brown",
+          "dateOfEmployment": "2022-06-15",
+          "dateOfBirth": "1985-03-25",
+          "phoneNumber": "555-0104",
+          "email": "michael.brown@example.com",
+          "department": "HR",
+          "position": "Senior"
+        },
+        {
+          "id": "5",
+          "firstName": "Sarah",
+          "lastName": "Wilson",
+          "dateOfEmployment": "2023-01-10",
+          "dateOfBirth": "1995-07-12",
+          "phoneNumber": "555-0105",
+          "email": "sarah.wilson@example.com",
+          "department": "Marketing",
+          "position": "Junior"
+        },
+        {
+          "id": "6",
+          "firstName": "David",
+          "lastName": "Miller",
+          "dateOfEmployment": "2021-09-20",
+          "dateOfBirth": "1987-11-05",
+          "phoneNumber": "555-0106",
+          "email": "david.miller@example.com",
+          "department": "Tech",
+          "position": "Senior"
+        },
+        {
+          "id": "7",
+          "firstName": "Emily",
+          "lastName": "Davis",
+          "dateOfEmployment": "2022-11-30",
+          "dateOfBirth": "1993-04-18",
+          "phoneNumber": "555-0107",
+          "email": "emily.davis@example.com",
+          "department": "Analytics",
+          "position": "Medior"
+        },
+        {
+          "id": "8",
+          "firstName": "James",
+          "lastName": "Taylor",
+          "dateOfEmployment": "2023-02-15",
+          "dateOfBirth": "1991-09-22",
+          "phoneNumber": "555-0108",
+          "email": "james.taylor@example.com",
+          "department": "Tech",
+          "position": "Junior"
+        },
+        {
+          "id": "9",
+          "firstName": "Lisa",
+          "lastName": "Anderson",
+          "dateOfEmployment": "2022-04-01",
+          "dateOfBirth": "1989-06-30",
+          "phoneNumber": "555-0109",
+          "email": "lisa.anderson@example.com",
+          "department": "HR",
+          "position": "Medior"
+        },
+        {
+          "id": "10",
+          "firstName": "Robert",
+          "lastName": "Thomas",
+          "dateOfEmployment": "2021-12-10",
+          "dateOfBirth": "1986-08-15",
+          "phoneNumber": "555-0110",
+          "email": "robert.thomas@example.com",
+          "department": "Tech",
+          "position": "Senior"
+        },
+        {
+          "id": "11",
+          "firstName": "Jennifer",
+          "lastName": "Jackson",
+          "dateOfEmployment": "2023-05-20",
+          "dateOfBirth": "1994-02-28",
+          "phoneNumber": "555-0111",
+          "email": "jennifer.jackson@example.com",
+          "department": "Marketing",
+          "position": "Junior"
+        },
+        {
+          "id": "12",
+          "firstName": "William",
+          "lastName": "White",
+          "dateOfEmployment": "2022-08-05",
+          "dateOfBirth": "1988-12-10",
+          "phoneNumber": "555-0112",
+          "email": "william.white@example.com",
+          "department": "Analytics",
+          "position": "Senior"
+        },
+        {
+          "id": "13",
+          "firstName": "Mary",
+          "lastName": "Harris",
+          "dateOfEmployment": "2023-04-15",
+          "dateOfBirth": "1992-05-25",
+          "phoneNumber": "555-0113",
+          "email": "mary.harris@example.com",
+          "department": "HR",
+          "position": "Junior"
+        },
+        {
+          "id": "14",
+          "firstName": "Richard",
+          "lastName": "Martin",
+          "dateOfEmployment": "2022-03-01",
+          "dateOfBirth": "1987-07-18",
+          "phoneNumber": "555-0114",
+          "email": "richard.martin@example.com",
+          "department": "Tech",
+          "position": "Medior"
+        },
+        {
+          "id": "15",
+          "firstName": "Patricia",
+          "lastName": "Thompson",
+          "dateOfEmployment": "2023-06-10",
+          "dateOfBirth": "1995-10-05",
+          "phoneNumber": "555-0115",
+          "email": "patricia.thompson@example.com",
+          "department": "Marketing",
+          "position": "Junior"
+        },
+        {
+          "id": "16",
+          "firstName": "Charles",
+          "lastName": "Garcia",
+          "dateOfEmployment": "2022-09-20",
+          "dateOfBirth": "1989-03-15",
+          "phoneNumber": "555-0116",
+          "email": "charles.garcia@example.com",
+          "department": "Analytics",
+          "position": "Senior"
+        },
+        {
+          "id": "17",
+          "firstName": "Elizabeth",
+          "lastName": "Martinez",
+          "dateOfEmployment": "2023-01-25",
+          "dateOfBirth": "1993-08-22",
+          "phoneNumber": "555-0117",
+          "email": "elizabeth.martinez@example.com",
+          "department": "Tech",
+          "position": "Medior"
+        },
+        {
+          "id": "18",
+          "firstName": "Joseph",
+          "lastName": "Robinson",
+          "dateOfEmployment": "2022-07-15",
+          "dateOfBirth": "1990-11-30",
+          "phoneNumber": "555-0118",
+          "email": "joseph.robinson@example.com",
+          "department": "HR",
+          "position": "Senior"
+        },
+        {
+          "id": "19",
+          "firstName": "Margaret",
+          "lastName": "Clark",
+          "dateOfEmployment": "2023-03-10",
+          "dateOfBirth": "1994-04-18",
+          "phoneNumber": "555-0119",
+          "email": "margaret.clark@example.com",
+          "department": "Marketing",
+          "position": "Medior"
+        },
+        {
+          "id": "20",
+          "firstName": "Thomas",
+          "lastName": "Rodriguez",
+          "dateOfEmployment": "2022-12-01",
+          "dateOfBirth": "1988-09-25",
+          "phoneNumber": "555-0120",
+          "email": "thomas.rodriguez@example.com",
+          "department": "Tech",
+          "position": "Senior"
+        }
+      ]
+  };

@@ -5,27 +5,27 @@ import { t } from '../localization/index.js';
 class NavigationMenu extends LitElement {
   static styles = css`
     :host {
-      display: block; /* Ensures the nav takes block space if needed */
+      display: block; 
     }
     nav {
       background-color: #333;
       padding: 1rem;
-      margin-bottom: 1rem; /* AppShell'deki main content'ten ayırmak için */
+      margin-bottom: 1rem; 
     }
     ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
       display: flex;
-      gap: 1rem; /* Linkler arası boşluk */
+      gap: 1rem; 
     }
     a {
       text-decoration: none;
       color: white;
       font-weight: bold;
     }
-    a:hover, a.active { /* .active sınıfı router tarafından eklenebilir (opsiyonel) */
-      color: #61dafb; /* React mavisi :) Lit için başka bir renk seçilebilir */
+    a:hover, a.active { 
+      color: #61dafb; 
       text-decoration: underline;
     }
   `;
