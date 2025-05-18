@@ -55,7 +55,11 @@ export const en = {
   employee_phoneNumber: 'Phone',
   employee_dateOfEmployment: 'Employed',
 
-  search_placeholder: 'Search employees', 
-  search_aria_label: 'Search Employees', 
-  no_employees_found_search: 'No employees found matching "{{term}}".', 
+  search_placeholder: 'Search employees',
+  search_aria_label: 'Search Employees',
+  no_employees_found_search: 'No employees found matching "{{term}}".',
+
+  button_previous: 'Previous',
+  button_next: 'Next',
+  page_info: 'Page {{currentPage}} of {{totalPages}}',
 };

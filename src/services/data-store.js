@@ -1,39 +1,7 @@
 const STORAGE_KEY = 'employee_management_data';
-const initialEmployees = [
-  {
-    id: '1',
-    firstName: 'John',
-    lastName: 'Doe',
-    dateOfEmployment: '2022-01-15',
-    dateOfBirth: '1990-05-20',
-    phoneNumber: '555-0101',
-    email: 'john.doe@example.com',
-    department: 'Tech',
-    position: 'Senior',
-  },
-  {
-    id: '2',
-    firstName: 'Jane',
-    lastName: 'Smith',
-    dateOfEmployment: '2021-11-01',
-    dateOfBirth: '1992-08-10',
-    phoneNumber: '555-0102',
-    email: 'jane.smith@example.com',
-    department: 'Analytics',
-    position: 'Medior',
-  },
-  {
-    id: '3',
-    firstName: 'Alice',
-    lastName: 'Johnson',
-    dateOfEmployment: '2023-03-01',
-    dateOfBirth: '1988-12-30',
-    phoneNumber: '555-0103',
-    email: 'alice.johnson@example.com',
-    department: 'Tech',
-    position: 'Junior',
-  },
-];
+import employeesData from '../data/employees.json';
+
+const initialEmployees = employeesData.employees;
 
 const generateId = () => {
   return Math.random().toString(36).substr(2, 9) + Date.now().toString(36);

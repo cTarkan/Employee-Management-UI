@@ -58,4 +58,8 @@ export const tr = {
   search_placeholder: 'Çalışanları ara',
   search_aria_label: 'Çalışanları Ara',
   no_employees_found_search: '"{{term}}" ile eşleşen çalışan bulunamadı.',
+
+  button_previous: 'Önceki',
+  button_next: 'Sonraki',
+  page_info: 'Sayfa {{currentPage}} / {{totalPages}}',
 };

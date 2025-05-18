@@ -3,12 +3,16 @@ import { getEmployees, deleteEmployee } from '../services/data-store.js';
 import { t } from '../localization/index.js';
 import { Router } from '@vaadin/router';
 
+const ITEMS_PER_PAGE = 5;
+
 class EmployeeListPage extends LitElement {
   static properties = {
     _allEmployees: { state: true },
+    _filteredEmployees: { state: true },
     employees: { type: Array },
     viewMode: { type: String },
     searchTerm: { type: String },
+    currentPage: { type: Number },
   };
 
   static styles = css`
@@ -32,42 +36,76 @@ class EmployeeListPage extends LitElement {
     .employee-card p { margin: 0.25rem 0; font-size: 0.9rem; }
     .employee-card .label { font-weight: bold; }
     .employee-card .actions { margin-top: 1rem; text-align: right; }
+    
+    .pagination-controls { margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; }
+    .pagination-controls button { padding: 0.4rem 0.8rem; border: 1px solid #ccc; background-color: #fff; color: var(--primary-color, #007bff); cursor: pointer; border-radius: 4px; }
+    .pagination-controls button:disabled { color: #999; border-color: #ddd; cursor: not-allowed; background-color: #f9f9f9; } 
+    .pagination-controls button:hover:not(:disabled) { background-color: #e9ecef; }
+    .pagination-controls .page-info { margin: 0 0.5rem; font-size: 0.9rem; }
   `;
 
   constructor() {
     super();
     this._allEmployees = [];
+    this._filteredEmployees = [];
     this.employees = [];
     this.viewMode = 'table';
     this.searchTerm = '';
+    this.currentPage = 1;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.loadAndFilterEmployees();
+    this.loadAndProcessEmployees();
   }
 
-  loadAndFilterEmployees() {
+  loadAndProcessEmployees() {
     this._allEmployees = getEmployees();
-    this.filterEmployees();
+    this.filterAndPaginateEmployees();
   }
 
   handleSearchInputChange(event) {
     this.searchTerm = event.target.value;
-    this.filterEmployees();
+    this.currentPage = 1;
+    this.filterAndPaginateEmployees();
   }
 
-  filterEmployees() {
+  filterAndPaginateEmployees() {
     const term = this.searchTerm.toLowerCase().trim();
     if (!term) {
-      this.employees = [...this._allEmployees];
-      return;
+      this._filteredEmployees = [...this._allEmployees];
+    } else {
+      this._filteredEmployees = this._allEmployees.filter(emp =>
+        Object.values(emp).some(val =>
+          String(val).toLowerCase().includes(term)
+        )
+      );
     }
-    this.employees = this._allEmployees.filter(emp =>
-      Object.values(emp).some(val =>
-        String(val).toLowerCase().includes(term)
-      )
-    );
+    this.paginateEmployees();
+  }
+
+  paginateEmployees() {
+    const startIndex = (this.currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    this.employees = this._filteredEmployees.slice(startIndex, endIndex);
+  }
+
+  get totalPages() {
+    return Math.ceil(this._filteredEmployees.length / ITEMS_PER_PAGE);
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.paginateEmployees();
+    }
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.paginateEmployees();
+    }
   }
 
   setViewMode(mode) {
@@ -87,16 +125,14 @@ class EmployeeListPage extends LitElement {
       return;
     }
     const employeeFullName = `${employee.firstName} ${employee.lastName}`;
-    const confirmationMessage = t('confirm_delete_employee', { name: employeeFullName, fallback: `Are you sure you want to delete ${employeeFullName}?` });
+    const confirmationMessage = t('confirm_delete_employee', { name: employeeFullName });
     if (confirm(confirmationMessage)) {
-      if (deleteEmployee(employee.id)) this.loadAndFilterEmployees(); // reload and re-filter
-      else alert(t('error_delete_employee', { name: employeeFullName, fallback: `Could not delete ${employeeFullName}.`}));
-    }
-  }
-
-  setViewMode(mode) {
-    if (mode === 'table' || mode === 'list') {
-      this.viewMode = mode;
+      if (deleteEmployee(employee.id)) {
+        this.currentPage = 1;
+        this.loadAndProcessEmployees(); 
+      } else {
+        alert(t('error_delete_employee', { name: employeeFullName }));
+      }
     }
   }
 
@@ -114,8 +150,8 @@ class EmployeeListPage extends LitElement {
           ${this.employees.map(emp => html`
             <tr>
               <td>${emp.firstName}</td><td>${emp.lastName}</td><td>${emp.email}</td>
-              <td>${t(`department_${emp.department.toLowerCase()}`, {fallback: emp.department})}</td>
-              <td>${t(`position_${emp.position.toLowerCase()}`, {fallback: emp.position})}</td>
+              <td>${t(`department_${emp.department.toLowerCase()}`, { fallback: emp.department })}</td>
+              <td>${t(`position_${emp.position.toLowerCase()}`, { fallback: emp.position })}</td>
               <td class="actions">
                 <button class="edit-btn" @click=${() => this.handleEdit(emp)}>${t('button_edit')}</button>
                 <button class="delete-btn" @click=${() => this.handleDelete(emp)}>${t('button_delete')}</button>
@@ -135,8 +171,8 @@ class EmployeeListPage extends LitElement {
             <h3>${emp.firstName} ${emp.lastName}</h3>
             <p><span class="label">${t('employee_email')}:</span> ${emp.email}</p>
             <p><span class="label">${t('employee_phoneNumber')}:</span> ${emp.phoneNumber}</p>
-            <p><span class="label">${t('employee_department')}:</span> ${t(`department_${emp.department.toLowerCase()}`, {fallback: emp.department})}</p>
-            <p><span class="label">${t('employee_position')}:</span> ${t(`position_${emp.position.toLowerCase()}`, {fallback: emp.position})}</p>
+            <p><span class="label">${t('employee_department')}:</span> ${t(`department_${emp.department.toLowerCase()}`, { fallback: emp.department })}</p>
+            <p><span class="label">${t('employee_position')}:</span> ${t(`position_${emp.position.toLowerCase()}`, { fallback: emp.position })}</p>
             <p><span class="label">${t('employee_dateOfEmployment')}:</span> ${emp.dateOfEmployment}</p>
             <div class="actions">
               <button class="edit-btn" @click=${() => this.handleEdit(emp)}>${t('button_edit')}</button>
@@ -156,11 +192,10 @@ class EmployeeListPage extends LitElement {
           <div class="search-controls">
             <input
               type="search"
-              id="searchInput"
-              placeholder="${t('search_placeholder', { fallback: 'Search employees...' })}"
+              placeholder="${t('search_placeholder')}"
               .value=${this.searchTerm}
               @input=${this.handleSearchInputChange}
-              aria-label="${t('search_aria_label', { fallback: 'Search Employees' })}"
+              aria-label="${t('search_aria_label')}"
             />
           </div>
           <div class="view-toggle">
@@ -169,14 +204,32 @@ class EmployeeListPage extends LitElement {
           </div>
         </div>
 
-        ${this.employees.length === 0 && this.searchTerm
-          ? html`<p>${t('no_employees_found_search', { term: this.searchTerm, fallback: `No employees found matching "${this.searchTerm}".` })}</p>`
-          : this.employees.length === 0 && !this.searchTerm
+        ${this._filteredEmployees.length === 0 && this.searchTerm
+          ? html`<p>${t('no_employees_found_search', { term: this.searchTerm })}</p>`
+          : this._filteredEmployees.length === 0 && !this.searchTerm
             ? html`<p>${t('no_employees_found')}</p>`
             : this.viewMode === 'table'
-              ? this.renderTableView()
-              : this.renderListView()
+              ? this.renderTableView() // Bu metot zaten this.employees (sayfalanmış) kullanıyor
+              : this.renderListView()  // Bu metot da this.employees (sayfalanmış) kullanıyor
         }
+
+        ${this.totalPages > 1 ? html`
+          <div class="pagination-controls">
+            <button 
+              @click=${this.goToPreviousPage} 
+              ?disabled=${this.currentPage === 1}>
+              ${t('button_previous', { fallback: 'Previous' })}
+            </button>
+            <span class="page-info">
+              ${t('page_info', { currentPage: this.currentPage, totalPages: this.totalPages, fallback: `Page ${this.currentPage} of ${this.totalPages}` })}
+            </span>
+            <button 
+              @click=${this.goToNextPage} 
+              ?disabled=${this.currentPage === this.totalPages}>
+              ${t('button_next', { fallback: 'Next' })}
+            </button>
+          </div>
+        ` : ''}
       </div>
     `;
   }
