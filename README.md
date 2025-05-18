@@ -60,7 +60,7 @@ src/
 
 1. Clone this repository
 2. Install dependencies: `npm install`
-3. Start the application: `npm start`
+3. Start the application: `npm run dev`
 4. Open your browser and go to `http://localhost:3000`
 
 ## Testing
