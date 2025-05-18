@@ -54,4 +54,8 @@ export const tr = {
   button_view_list: 'Liste Görünümü',
   employee_phoneNumber: 'Telefon',
   employee_dateOfEmployment: 'İşe Giriş Tarihi',
+
+  search_placeholder: 'Çalışanları ara',
+  search_aria_label: 'Çalışanları Ara',
+  no_employees_found_search: '"{{term}}" ile eşleşen çalışan bulunamadı.',
 };
